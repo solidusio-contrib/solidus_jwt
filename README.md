@@ -42,7 +42,7 @@ SolidusJwt.decode(token)
 # [{"exp"=>1540532367, "iat"=>"2018-10-26 04:39:27 UTC", "id"=>1, "email"=>"email@example.com"}, {"alg"=>"HS256"}]
 ```
 
-### Distributing a token using solidus_auth_devise:
+### Distributing a Token Using 'solidus_auth_devise':
 
 To have the `solidus_auth_devise` gem distribute a token back to the client
 you can do the following:

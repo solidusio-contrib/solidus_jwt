@@ -1,7 +1,7 @@
 SolidusJwt
 ==========
 
-This gem gives **Solidus stores** the ability to authenticate API requests with
+This gem gives [Solidus](https://github.com/solidusio/solidus) stores the ability to authenticate API requests with
 JSON Web Tokens.
 
 Installation

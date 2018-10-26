@@ -1,7 +1,7 @@
 SolidusJwt
 ==========
 
-This gem gives Solidus stores the ability to authenticate API requests with
+This gem gives **Solidus stores** the ability to authenticate API requests with
 JSON Web Tokens.
 
 Installation
@@ -36,10 +36,10 @@ end
 
 user = Spree::User.new email: 'email@example.com', id: 1
 token = user.generate_jwt_token(expires_in: 1.hour.to_i) # Expiration is time in seconds
-#=> eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDA1MzIzNjcsImlhdCI6IjIwMTgtMTAtMjYgMDQ6Mzk6MjcgVVRDIiwiaWQiOjEsImVtYWlsIjoiZW1haWxAZXhhbXBsZS5jb20ifQ.LWqf_cfsMwB995AqN9wj5IseJqEZYaIHHIhf8Ej7WIc
+# eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDA1MzIzNjcsImlhdCI6IjIwMTgtMTAtMjYgMDQ6Mzk6MjcgVVRDIiwiaWQiOjEsImVtYWlsIjoiZW1haWxAZXhhbXBsZS5jb20ifQ.LWqf_cfsMwB995AqN9wj5IseJqEZYaIHHIhf8Ej7WIc
 
 SolidusJwt.decode(token)
-#=> [{"exp"=>1540532367, "iat"=>"2018-10-26 04:39:27 UTC", "id"=>1, "email"=>"email@example.com"}, {"alg"=>"HS256"}]
+# [{"exp"=>1540532367, "iat"=>"2018-10-26 04:39:27 UTC", "id"=>1, "email"=>"email@example.com"}, {"alg"=>"HS256"}]
 ```
 
 ### Distributing a token using solidus_auth_devise:

@@ -4,6 +4,9 @@ SolidusJwt
 This gem gives [Solidus](https://github.com/solidusio/solidus) stores the ability to authenticate API requests with
 JSON Web Tokens.
 
+To use this gem, you should have a sound understanding of **JSON web tokens**. For more information you can visit the [**Offical JWT Website**](https://jwt.io/introduction/). It may also be useful to look at [**ruby-jwt**](https://github.com/jwt/ruby-jwt), the library required by this gem.
+
+
 Installation
 ------------
 

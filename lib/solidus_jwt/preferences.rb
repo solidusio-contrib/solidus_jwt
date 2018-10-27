@@ -9,6 +9,12 @@ module SolidusJwt
     attr_writer :jwt_secret
 
     ##
+    # @!attribute [rw] allow_spree_api_key
+    #   @return [String] Allow spree_api_key to still be used. (default true)
+    #
+    preference :allow_spree_api_key, :boolean, default: true
+
+    ##
     # @see https://github.com/jwt/ruby-jwt#algorithms-and-usage
     # @!attribute [rw] jwt_algorithm
     #   @return [String] The hashing algorithm to use. (default 'HS256')

@@ -26,7 +26,30 @@ bundle exec rails g solidus_jwt:install
 
 Configuration
 -------------
-TODO
+```ruby
+SolidusJwt::Config.configure do |config|
+  config.jwt_secret           = 'secret'
+  config.allow_spree_api_key  = true
+  config.jwt_algorithm        = 'HS256'
+  config.jwt_expiration       = 3600
+  config.jwt_options          = { only: %i[email first_name id last_name] }
+end
+```
+
+#### `jwt_secret`:
+Defaults to `Rails.application.secret_key_base`. The encryption key, should be kept secret and secure.
+
+#### `allow_spree_api_key`:
+Defaults to `true`. When true, the `spree_api_key` is still accepted as an authentication token along with json web tokens.
+
+#### `jwt_algorithm`:
+Defaults to `HS256`. See: https://github.com/jwt/ruby-jwt#algorithms-and-usage for more information on accepted algorithms.
+
+#### `jwt_expiration`:
+Defaults to `3600` (1 hour). The amount of time in seconds that the token should last for.
+
+#### `jwt_options`
+Defaults to `{ only: %i[email first_name id last_name] }`. These options are passed into `Spree::User#as_json` when serializing the token's payload.  Keep in mind that the more information included, the larger the token will be. It may be in your best interest to keep it short and simple.
 
 Usage
 -------------

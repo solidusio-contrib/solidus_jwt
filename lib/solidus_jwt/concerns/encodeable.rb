@@ -15,7 +15,7 @@ module SolidusJwt
       extras['exp'] = Time.current.to_i + expires_in if expires_in.present?
       extras['iat'] = Time.current
 
-      payload = extras.merge(payload)
+      payload = extras.merge(payload).as_json
       JWT.encode(payload, SolidusJwt::Config.jwt_secret,
         SolidusJwt::Config.jwt_algorithm)
     end

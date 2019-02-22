@@ -27,6 +27,8 @@ bundle exec rails g solidus_jwt:install
 Configuration
 -------------
 ```ruby
+# config/initializers/solidus_jwt.rb
+
 SolidusJwt::Config.configure do |config|
   config.jwt_secret           = 'secret'
   config.allow_spree_api_key  = true

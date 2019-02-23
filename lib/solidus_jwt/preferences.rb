@@ -34,6 +34,12 @@ module SolidusJwt
     #
     preference :jwt_options, :hash, default: { only: %i[email first_name id last_name] }
 
+    # @!attribute [rw] refresh_expriation
+    #   @return [String] How long until the refresh token expires in seconds
+    #   (default: +2592000+)
+    #
+    preference :refresh_expiration, :integer, default: 2_592_000
+
     ##
     # Get the secret token to encrypt json web tokens with.
     # @return [String] The secret used to encrypt json web tokens

@@ -16,9 +16,10 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'jwt'
-  s.add_dependency "solidus_backend", ['>= 1.0', '< 3']
-  s.add_dependency "solidus_core", ['>= 1.0', '< 3']
-  s.add_dependency "solidus_support", '>= 0.1.3'
+  s.add_dependency 'solidus_auth_devise'
+  s.add_dependency 'solidus_backend', ['>= 1.0', '< 3']
+  s.add_dependency 'solidus_core', ['>= 1.0', '< 3']
+  s.add_dependency 'solidus_support', '>= 0.1.3'
 
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'capybara'

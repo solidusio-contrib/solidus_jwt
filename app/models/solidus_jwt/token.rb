@@ -37,6 +37,10 @@ module SolidusJwt
       non_expired.where(active: true).find_by(token: token).present?
     end
 
+    def honor?
+      active? && !expired?
+    end
+
     def expired?
       created_at < SolidusJwt::Config.refresh_expiration.seconds.ago
     end

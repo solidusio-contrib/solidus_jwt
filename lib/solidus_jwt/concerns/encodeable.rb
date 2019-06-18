@@ -11,9 +11,9 @@ module SolidusJwt
     #
     def encode(payload:, expires_in: nil)
       # @see https://github.com/jwt/ruby-jwt#support-for-reserved-claim-names
-      current_time = Time.current
+      current_time = Time.current.to_i
       extras = {}
-      extras['exp'] = current_time.to_i + expires_in if expires_in.present?
+      extras['exp'] = current_time + expires_in if expires_in.present?
       extras['iat'] = current_time
 
       payload = extras.merge(payload).as_json

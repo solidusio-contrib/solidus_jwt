@@ -2,14 +2,14 @@ RSpec.shared_examples 'Decodeable Examples' do
   describe 'decode' do
     let(:token) do
       JWT.encode(payload, SolidusJwt::Config.jwt_secret,
-        SolidusJwt::Config.jwt_algorithm)
+                 SolidusJwt::Config.jwt_algorithm)
     end
 
-    let(:payload) { { user_id: 1 } }
+    let(:payload) { { sub: 1 } }
 
     it 'decodes a json web token' do
       expect(JWT).to receive(:decode).with(token, SolidusJwt::Config.jwt_secret,
-        true, hash_including(algorithm: SolidusJwt::Config.jwt_algorithm))
+                                           true, hash_including(algorithm: SolidusJwt::Config.jwt_algorithm))
           .and_call_original
 
       decoded_token = subject.decode(token)

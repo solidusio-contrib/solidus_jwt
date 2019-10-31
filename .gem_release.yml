@@ -1,0 +1,5 @@
+bump:
+  recurse: false
+  file: 'lib/solidus_jwt/version.rb'
+  message: Bump SolidusJwt to %{version}
+  branch: true

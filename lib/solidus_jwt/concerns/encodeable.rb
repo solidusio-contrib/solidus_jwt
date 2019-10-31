@@ -10,15 +10,17 @@ module SolidusJwt
     # @return [String]
     #
     def encode(payload:, expires_in: nil)
-      # @see https://github.com/jwt/ruby-jwt#support-for-reserved-claim-names
-      current_time = Time.current.to_i
-      extras = {}
-      extras['exp'] = current_time + expires_in if expires_in.present?
-      extras['iat'] = current_time
+      jwt_payload = payload.dup.with_indifferent_access
 
-      payload = extras.merge(payload).as_json
-      JWT.encode(payload, SolidusJwt::Config.jwt_secret,
-        SolidusJwt::Config.jwt_algorithm)
+      current_time = Time.current.to_i
+
+      # @see https://github.com/jwt/ruby-jwt#support-for-reserved-claim-names
+      jwt_payload[:exp] ||= current_time + expires_in if expires_in.present?
+      jwt_payload[:iat] ||= current_time
+      jwt_payload[:iss] ||= 'solidus'
+
+      JWT.encode(jwt_payload, SolidusJwt::Config.jwt_secret,
+                 SolidusJwt::Config.jwt_algorithm)
     end
   end
 end

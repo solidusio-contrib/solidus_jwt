@@ -9,7 +9,7 @@ module SolidusJwt
     #
     def decode(token)
       JWT.decode(token, SolidusJwt::Config.jwt_secret, true,
-        algorithm: SolidusJwt::Config.jwt_algorithm)
+                 algorithm: SolidusJwt::Config.jwt_algorithm)
     end
   end
 end

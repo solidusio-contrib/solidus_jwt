@@ -9,7 +9,7 @@ module SolidusJwt
         resource = SolidusJwt::Token.find_by(auth_hash)
         return fail!(:invalid) if resource.nil? || resource.user.nil?
 
-        block = Proc.new do
+        block = proc do
           # If we honor then mark the refresh token as stale for one time use
           resource.honor? && resource.update_columns(active: false)
         end

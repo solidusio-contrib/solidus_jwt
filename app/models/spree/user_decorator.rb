@@ -1,7 +1,9 @@
 module Spree
   module UserDecorator
-    has_many :auth_tokens, class_name: 'SolidusJwt::Token'
-    
+    def self.prepended(base)
+      base.has_many :auth_tokens, class_name: 'SolidusJwt::Token'
+    end
+
     ##
     # Generate a json web token
     # @see https://github.com/jwt/ruby-jwt

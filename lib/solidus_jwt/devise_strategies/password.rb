@@ -8,7 +8,7 @@ module SolidusJwt
       def authenticate!
         resource = mapping.to.find_for_database_authentication(auth_hash)
 
-        block = Proc.new { resource.valid_password?(password) }
+        block = proc { resource.valid_password?(password) }
 
         if resource&.valid_for_authentication?(&block)
           resource.after_database_authentication

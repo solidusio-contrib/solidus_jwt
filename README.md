@@ -36,8 +36,9 @@ SolidusJwt::Config.configure do |config|
   config.jwt_secret           = 'secret'
   config.allow_spree_api_key  = true
   config.jwt_algorithm        = 'HS256'
-  config.jwt_expiration       = 3600
+  config.jwt_expiration       = 3_600
   config.jwt_options          = { only: %i[email first_name id last_name] }
+  config.refresh_expiration   = 2_592_000
 end
 ```
 
@@ -55,6 +56,9 @@ Defaults to `3600` (1 hour). The amount of time in seconds that the token should
 
 #### `jwt_options`
 Defaults to `{ only: %i[email first_name id last_name] }`. These options are passed into `Spree::User#as_json` when serializing the token's payload.  Keep in mind that the more information included, the larger the token will be. It may be in your best interest to keep it short and simple.
+
+#### `refresh_expiration`:
+Defaults to `2592000` (30 days). The amount of time in seconds that the token should last for.
 
 Usage
 -------------
@@ -83,7 +87,59 @@ SolidusJwt.decode(token)
 # ]
 ```
 
-### Distributing a Token Using 'solidus_auth_devise':
+### Autenticate through the API
+
+If authenticating through the API, you must have 
+[solidus_auth_devise](https://github.com/solidusio/solidus_auth_devise) setup
+because `solidus_jwt` piggybacks off of the [Devise](https://github.com/plataformatec/devise) 
+gem. This enables authentication through a single point. If you implement 
+[Devise Lockable](https://www.rubydoc.info/github/plataformatec/devise/master/Devise/Models/Lockable), 
+then locking is respected both on the front-end as well as on the API.
+
+```ruby
+POST /oauth/token
+{
+  "username": "user@example.com"
+  "password": "secret"
+  "grant_type": "password"
+}
+
+# { "access_token": "abc.123.efg", "refresh_token": "123456" }
+```
+
+You can now use the `access_token` to authentication with the 
+[Solidus API](https://github.com/solidusio/solidus/tree/master/api) in place
+of the `spree_api_key`.
+
+### Obtain a refresh token
+
+To refresh your access token, instead of re-authenticating you can send
+a refresh token.
+
+```ruby
+POST /oauth/token
+{
+  "refresh_token": "123456"
+  "grant_type": "refresh_token"
+}
+
+# { "access_token": "hij.456.klm", "refresh_token": "789abc" }
+```
+
+### Invalidate refresh tokens for a user
+
+It is good practice set the lifetime of an access token to be short. In case an
+access token is compromised, the attacker will only have access for a short time.
+
+To force a user to have to reauthencate rather than using a refresh token,
+you can do the following:
+
+```ruby
+# Invalidate all refresh tokens for a user
+SolidusJwt::Token.invalidate(user)
+```
+
+### Distributing a Token Using 'solidus_auth_devise' on front-end:
 
 To have the `solidus_auth_devise` gem distribute a token back to the client
 you can do the following:

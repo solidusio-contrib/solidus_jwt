@@ -1,6 +1,8 @@
 SolidusJwt
 ==========
 
+[![CircleCI](https://circleci.com/gh/skukx/solidus_jwt.svg?style=svg)](https://circleci.com/gh/skukx/solidus_jwt)
+
 This gem gives [Solidus](https://github.com/solidusio/solidus) stores the ability to authenticate API requests with
 JSON Web Tokens.
 
@@ -64,10 +66,20 @@ end
 
 user = Spree::User.new email: 'email@example.com', id: 1
 token = user.generate_jwt_token(expires_in: 1.hour.to_i) # Expiration is time in seconds
-# eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDA1MzIzNjcsImlhdCI6IjIwMTgtMTAtMjYgMDQ6Mzk6MjcgVVRDIiwiaWQiOjEsImVtYWlsIjoiZW1haWxAZXhhbXBsZS5jb20ifQ.LWqf_cfsMwB995AqN9wj5IseJqEZYaIHHIhf8Ej7WIc
+# eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJlbWFpbEBleGFtcGxlLmNvbSIsInN1YiI6MSwiZXhwIjoxNTcyNTg2NTA3LCJpYXQiOjE1NzI1ODI5MDcsImlzcyI6InNvbGlkdXMifQ.UEmPLClCmOii_5-Qa6fB_ToGavIJYY6PAyfhARitMwI
 
 SolidusJwt.decode(token)
-# [{"exp"=>1540532367, "iat"=>"2018-10-26 04:39:27 UTC", "id"=>1, "email"=>"email@example.com"}, {"alg"=>"HS256"}]
+# [
+#   {
+#     "id"=>1, 
+#     "email"=>"email@example.com", 
+#     "sub"=>1, 
+#     "exp"=>1572586507, 
+#     "iat"=>1572582907, 
+#     "iss"=>"solidus"
+#   },
+#   {"alg"=>"HS256"}
+# ]
 ```
 
 ### Distributing a Token Using 'solidus_auth_devise':

@@ -2,6 +2,8 @@
 
 AllCops:
   Exclude:
+    - 'Gemfile'
+    - '*.gemspec'
     - 'spec/dummy/**/*'
     - 'vendor/bundle/**/*'
   TargetRubyVersion: 2.4
@@ -15,13 +17,6 @@ Style/BracesAroundHashParameters:
 Style/ClassVars:
   Enabled: false
 
-# We need these names for backwards compatability
-Style/PredicateName:
-  Enabled: false
-
-Style/AccessorMethodName:
-  Enabled: false
-
 # This has been used for customization
 Style/MutableConstant:
   Enabled: false
@@ -32,19 +27,16 @@ Style/ClassAndModuleChildren:
 Style/GuardClause:
   Enabled: false
 
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 Style/WordArray:
   Enabled: false
 
 Style/ConditionalAssignment:
   Enabled: false
 
-Performance/Count:
-  Enabled: false
-
 Style/RaiseArgs:
-  Enabled: false
-
-Naming/BinaryOperatorParameterName:
   Enabled: false
 
 # We can use good judgement here
@@ -53,33 +45,6 @@ Style/RegexpLiteral:
 
 # Unicode comments are useful
 Style/AsciiComments:
-  Enabled: false
-
-Lint/EndAlignment:
-  Enabled: false
-
-Style/ElseAlignment:
-  Enabled: false
-
-Style/IndentationWidth:
-  Enabled: false
-
-Style/AlignParameters:
-  Enabled: false
-
-Style/ClosingParenthesisIndentation:
-  Enabled: false
-
-Style/MultilineMethodCallIndentation:
-  Enabled: false
-
-Style/IndentArray:
-  Enabled: false
-
-Style/IndentHash:
-  Enabled: false
-
-Style/AlignHash:
   Enabled: false
 
 # From http://relaxed.ruby.style/
@@ -99,10 +64,6 @@ Style/BlockDelimiters:
 Style/Documentation:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#styledocumentation
-
-Style/DotPosition:
-  Enabled: false
-  StyleGuide: http://relaxed.ruby.style/#styledotposition
 
 Style/DoubleNegation:
   Enabled: false
@@ -168,14 +129,6 @@ Style/SingleLineMethods:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylesinglelinemethods
 
-Style/SpaceBeforeBlockBraces:
-  Enabled: false
-  StyleGuide: http://relaxed.ruby.style/#stylespacebeforeblockbraces
-
-Style/SpaceInsideParens:
-  Enabled: false
-  StyleGuide: http://relaxed.ruby.style/#stylespaceinsideparens
-
 Style/SpecialGlobalVars:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylespecialglobalvars
@@ -190,6 +143,39 @@ Style/SymbolProc:
 Style/WhileUntilModifier:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylewhileuntilmodifier
+
+Layout/AlignHash:
+  Enabled: false
+
+Layout/AlignParameters:
+  Enabled: false
+
+Layout/ClosingParenthesisIndentation:
+  Enabled: false
+
+Layout/DotPosition:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#styledotposition
+
+Layout/IndentationWidth:
+  Enabled: false
+
+Layout/EndAlignment:
+  Enabled: false
+
+Layout/ElseAlignment:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Layout/SpaceBeforeBlockBraces:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylespacebeforeblockbraces
+
+Layout/SpaceInsideParens:
+  Enabled: false
+  StyleGuide: http://relaxed.ruby.style/#stylespaceinsideparens
 
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
@@ -207,6 +193,9 @@ Metrics/AbcSize:
   Enabled: false
 
 Metrics/BlockNesting:
+  Enabled: false
+
+Metrics/BlockLength:
   Enabled: false
 
 Metrics/ClassLength:
@@ -228,4 +217,14 @@ Metrics/ParameterLists:
   Enabled: false
 
 Metrics/PerceivedComplexity:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/BinaryOperatorParameterName:
+  Enabled: false
+
+# We need these names for backwards compatability
+Naming/PredicateName:
   Enabled: false

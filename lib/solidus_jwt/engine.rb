@@ -10,7 +10,9 @@ module SolidusJwt
     end
 
     def self.activate
-      Dir.glob(File.join(File.dirname(__FILE__), '../../app/**/*_decorator*.rb')) do |c|
+      decorator_pattern = File.join(__dir__, '../../app/**/*_decorator*.rb')
+
+      Dir.glob(decorator_pattern) do |c|
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
     end

@@ -1,7 +1,7 @@
 module SolidusJwt
   MAJOR = 0
-  MINOR = 0
-  PATCH = 2
+  MINOR = 1
+  PATCH = 0
   PRERELEASE = nil
 
   def self.version

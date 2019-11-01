@@ -2,6 +2,7 @@ SolidusJwt
 ==========
 
 [![CircleCI](https://circleci.com/gh/skukx/solidus_jwt.svg?style=svg)](https://circleci.com/gh/skukx/solidus_jwt)
+[![Gem Version](https://badge.fury.io/rb/solidus_jwt.svg)](https://badge.fury.io/rb/solidus_jwt)
 
 This gem gives [Solidus](https://github.com/solidusio/solidus) stores the ability to authenticate API requests with
 JSON Web Tokens.

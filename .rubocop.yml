@@ -144,9 +144,6 @@ Style/WhileUntilModifier:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylewhileuntilmodifier
 
-Layout/AlignParameters:
-  Enabled: false
-
 Layout/ClosingParenthesisIndentation:
   Enabled: false
 
@@ -169,6 +166,9 @@ Layout/ElseAlignment:
 Layout/MultilineMethodCallIndentation:
   Enabled: false
 
+Layout/ParameterAlignment:
+  Enabled: false
+
 Layout/SpaceBeforeBlockBraces:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#stylespacebeforeblockbraces
@@ -185,7 +185,7 @@ Lint/AssignmentInCondition:
   Enabled: false
   StyleGuide: http://relaxed.ruby.style/#lintassignmentincondition
 
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Exclude:
     - 'Rakefile'
 
@@ -196,9 +196,6 @@ Metrics/BlockLength:
   Enabled: false
 
 Metrics/BlockNesting:
-  Enabled: false
-
-Metrics/BlockLength:
   Enabled: false
 
 Metrics/ClassLength:

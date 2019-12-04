@@ -14,8 +14,12 @@ module Spree
       private
 
       def render_token_for(user)
+        expires_in = SolidusJwt::Config.jwt_expiration
+
         render json: {
-          access_token: user.generate_jwt,
+          token_type: 'bearer',
+          access_token: user.generate_jwt(expires_in: expires_in),
+          expires_in: expires_in,
           refresh_token: generate_refresh_token_for(user)
         }
       end

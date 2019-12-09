@@ -2,7 +2,7 @@ module SolidusJwt
   MAJOR = 1
   MINOR = 0
   PATCH = 0
-  PRERELEASE = 'beta2'
+  PRERELEASE = nil
 
   def self.version
     version = [MAJOR, MINOR, PATCH].join('.')

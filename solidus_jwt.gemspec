@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'jwt'
   s.add_dependency 'solidus_auth_devise'
-  s.add_dependency 'solidus_backend', ['>= 1.0', '< 3']
+  s.add_dependency 'solidus_api', ['>= 1.0', '< 3']
   s.add_dependency 'solidus_core', ['>= 1.0', '< 3']
   s.add_dependency 'solidus_support', '>= 0.1.3'
 

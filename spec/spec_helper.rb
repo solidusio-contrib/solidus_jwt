@@ -25,9 +25,6 @@ require 'ffaker'
 # in spec/support/ and its subdirectories.
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].sort.each { |f| require f }
 
-# Requires factories and other useful helpers defined in spree_core.
-require 'solidus_support/extension/feature_helper'
-
 # Requires factories defined in lib/solidus_jwt/factories.rb
 require 'solidus_jwt/factories'
 

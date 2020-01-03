@@ -1,5 +1,5 @@
 module SolidusJwt
-  class Token < ApplicationRecord
+  class Token < BaseRecord
     attr_readonly :token
     enum auth_type: %i[refresh_token access_token]
 

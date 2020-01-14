@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'spree/testing_support/factories/user_factory'
 
 RSpec.describe SolidusJwt::DeviseStrategies::Password do
   let(:request) { double(:request) }
@@ -13,7 +14,7 @@ RSpec.describe SolidusJwt::DeviseStrategies::Password do
   end
 
   let(:headers) { {} }
-  let(:user) { FactoryBot.create(:user, email: 'user@example.com', password: password) }
+  let(:user) { FactoryBot.create(:user, password: password) }
   let(:password) { 'secret' }
 
   before(:each) do

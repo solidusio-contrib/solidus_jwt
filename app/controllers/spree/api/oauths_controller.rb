@@ -7,7 +7,7 @@ module Spree
         if user = try_authenticate_user
           render_token_for(user)
         else
-          render status: 401, json: { error: 'invalid username or password' }
+          render status: 401, json: { error: I18n.t(:invalid_credentials, scope: 'solidus_jwt') }
         end
       end
 

@@ -24,19 +24,37 @@ RSpec.describe 'Token Retrieval', type: :request do
       end
 
       context 'when failure' do
-        before(:each) do
+        subject do
           post '/oauth/token', params: { username: user.email, password: 'invalid', grant_type: 'password' }
         end
 
         it 'responds with status 401' do
+          subject
           expect(response).to have_http_status(:unauthorized)
         end
 
         it 'responds with invalid username or password' do
+          subject
           json = JSON.parse(response.body)
 
           expect(json).to have_key('error')
-          expect(json['error']).to include('invalid username or password')
+          expect(json['error']).to eq('invalid username or password')
+        end
+
+        context 'with error message translation' do
+          before do
+            expect(I18n).to receive(:t).with(:invalid_credentials, scope: 'solidus_jwt') do
+              'Wrong token!'
+            end
+          end
+
+          it 'responds with translated error message' do
+            subject
+            json = JSON.parse(response.body)
+
+            expect(json).to have_key('error')
+            expect(json['error']).to eq('Wrong token!')
+          end
         end
       end
     end

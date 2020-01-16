@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'spree/testing_support/factories/user_factory'
 
 RSpec.describe 'SolidusJwt Authentication', type: :request do
   let(:params) do

@@ -18,7 +18,6 @@ require File.expand_path('dummy/config/environment.rb', __dir__)
 
 require 'byebug'
 require 'rspec/rails'
-require 'database_cleaner'
 require 'ffaker'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -30,5 +29,5 @@ require 'solidus_jwt/factories'
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
-  config.use_transactional_fixtures = false
+  config.use_transactional_fixtures = true
 end

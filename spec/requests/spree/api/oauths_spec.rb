@@ -1,7 +1,8 @@
 require 'spec_helper'
+require 'spree/testing_support/factories/user_factory'
 
 RSpec.describe 'Token Retrieval', type: :request do
-  let(:user) { FactoryBot.create(:user, email: 'user@example.com', password: 'password') }
+  let(:user) { FactoryBot.create(:user, password: 'password') }
 
   describe '/api/token' do
     context 'when username and password are provided' do

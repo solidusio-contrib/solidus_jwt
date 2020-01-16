@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'spree/testing_support/factories/user_factory'
 
 RSpec.describe SolidusJwt::DeviseStrategies::RefreshToken do
   let(:request) { double(:request) }
@@ -12,7 +13,7 @@ RSpec.describe SolidusJwt::DeviseStrategies::RefreshToken do
   end
 
   let(:headers) { {} }
-  let(:user) { FactoryBot.create(:user, email: 'user@example.com', password: password) }
+  let(:user) { FactoryBot.create(:user, password: password) }
   let(:password) { 'secret' }
   let(:token) { user.auth_tokens.create! }
 

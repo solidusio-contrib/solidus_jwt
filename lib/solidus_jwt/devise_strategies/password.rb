@@ -1,10 +1,6 @@
 module SolidusJwt
   module DeviseStrategies
-    class Password < Devise::Strategies::Base
-      def valid?
-        valid_grant_type? && valid_params?
-      end
-
+    class Password < Base
       def authenticate!
         resource = mapping.to.find_for_database_authentication(auth_hash)
 
@@ -22,10 +18,6 @@ module SolidusJwt
 
       def auth_hash
         { email: username }
-      end
-
-      def grant_type
-        params[:grant_type]
       end
 
       def username

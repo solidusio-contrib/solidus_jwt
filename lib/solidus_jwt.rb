@@ -4,6 +4,7 @@ require 'solidus_core'
 require 'solidus_auth_devise'
 require 'solidus_jwt/engine'
 
+require 'solidus_jwt/devise_strategies/base'
 require 'solidus_jwt/devise_strategies/password'
 require 'solidus_jwt/devise_strategies/refresh_token'
 

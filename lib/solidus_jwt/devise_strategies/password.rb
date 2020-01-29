@@ -2,8 +2,6 @@ module SolidusJwt
   module DeviseStrategies
     class Password < Base
       def authenticate!
-        resource = mapping.to.find_for_database_authentication(auth_hash)
-
         block = proc { resource.valid_password?(password) }
 
         if resource&.valid_for_authentication?(&block)
@@ -15,6 +13,10 @@ module SolidusJwt
       end
 
       private
+
+      def resource
+        @resource ||= mapping.to.find_for_database_authentication(auth_hash)
+      end
 
       def auth_hash
         { email: username }

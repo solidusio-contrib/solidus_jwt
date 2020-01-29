@@ -2,7 +2,6 @@ module SolidusJwt
   module DeviseStrategies
     class RefreshToken < Base
       def authenticate!
-        resource = SolidusJwt::Token.find_by(auth_hash)
         return fail!(:invalid) if resource.nil? || resource.user.nil?
 
         block = proc do
@@ -18,6 +17,10 @@ module SolidusJwt
       end
 
       private
+
+      def resource
+        @resource ||= SolidusJwt::Token.find_by(auth_hash)
+      end
 
       def auth_hash
         { auth_type: :refresh, token: refresh_token }

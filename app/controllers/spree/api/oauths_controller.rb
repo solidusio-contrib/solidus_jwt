@@ -5,7 +5,7 @@ module Spree
 
       def token
         if user = try_authenticate_user
-          render_token_for(user)
+          render json: token_response_json(user)
         else
           render status: 401, json: { error: I18n.t(:invalid_credentials, scope: 'solidus_jwt') }
         end
@@ -13,10 +13,10 @@ module Spree
 
       private
 
-      def render_token_for(user)
+      def token_response_json(user)
         expires_in = SolidusJwt::Config.jwt_expiration
 
-        render json: {
+        {
           token_type: 'bearer',
           access_token: user.generate_jwt(expires_in: expires_in),
           expires_in: expires_in,

@@ -1,12 +1,7 @@
 module SolidusJwt
   module DeviseStrategies
-    class RefreshToken < Devise::Strategies::Base
-      def valid?
-        valid_grant_type? && valid_params?
-      end
-
+    class RefreshToken < Base
       def authenticate!
-        resource = SolidusJwt::Token.find_by(auth_hash)
         return fail!(:invalid) if resource.nil? || resource.user.nil?
 
         block = proc do
@@ -23,12 +18,12 @@ module SolidusJwt
 
       private
 
-      def auth_hash
-        { auth_type: :refresh, token: refresh_token }
+      def resource
+        @resource ||= SolidusJwt::Token.find_by(auth_hash)
       end
 
-      def grant_type
-        params[:grant_type]
+      def auth_hash
+        { auth_type: :refresh, token: refresh_token }
       end
 
       def refresh_token

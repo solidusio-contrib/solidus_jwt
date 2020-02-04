@@ -4,8 +4,15 @@ module Spree
       skip_before_action :authenticate_user
 
       def token
-        if user = try_authenticate_user
-          render json: token_response_json(user)
+        result = catch(:warden) do
+          try_authenticate_user
+        end
+
+        case result
+        when Spree::User
+          render json: token_response_json(result)
+        when Hash
+          render status: 401, json: { error: I18n.t(result[:message], scope: 'devise.failure') }
         else
           render status: 401, json: { error: I18n.t(:invalid_credentials, scope: 'solidus_jwt') }
         end

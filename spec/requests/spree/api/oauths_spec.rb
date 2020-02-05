@@ -23,7 +23,32 @@ RSpec.describe 'Token Retrieval', type: :request do
         end
       end
 
-      context 'when failure' do
+      context 'when warden failure' do
+        subject do
+          post '/oauth/token', params: { username: user.email, password: 'password', grant_type: 'password' }
+        end
+
+        before do
+          expect_any_instance_of(Spree::Api::OauthsController).to receive(:try_authenticate_user) do
+            throw(:warden, { scope: :spree_user, message: :locked })
+          end
+        end
+
+        it 'responds with status 401' do
+          subject
+          expect(response).to have_http_status(:unauthorized)
+        end
+
+        it 'responds with translated Devise error message' do
+          subject
+          json = JSON.parse(response.body)
+
+          expect(json).to have_key('error')
+          expect(json['error']).to eq('Your account is locked.')
+        end
+      end
+
+      context 'when invalid password' do
         subject do
           post '/oauth/token', params: { username: user.email, password: 'invalid', grant_type: 'password' }
         end

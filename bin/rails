@@ -1,8 +1,18 @@
 #!/usr/bin/env ruby
-# This command will automatically be run when you run "rails" with Rails 4 gems installed from the root of your application.
 
-ENGINE_ROOT = File.expand_path('..', __dir__)
-ENGINE_PATH = File.expand_path('../lib/solidus_jwt/engine', __dir__)
+# frozen_string_literal: true
 
-require 'rails/all'
-require 'rails/engine/commands'
+app_root = 'sandbox'
+
+unless File.exist? "#{app_root}/bin/rails"
+  warn 'Creating the sandbox app...'
+  Dir.chdir "#{__dir__}/.." do
+    system "#{__dir__}/sandbox" or begin # rubocop:disable Style/AndOr
+      warn 'Automatic creation of the sandbox app failed'
+      exit 1
+    end
+  end
+end
+
+Dir.chdir app_root
+exec 'bin/rails', *ARGV

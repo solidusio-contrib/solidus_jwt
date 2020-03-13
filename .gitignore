@@ -13,4 +13,7 @@ nbproject
 pkg
 *.swp
 spec/dummy
+spec/examples.txt
+
+sandbox/
 .byebug_history

@@ -3,7 +3,7 @@ module SolidusJwt
     attr_readonly :token
     enum auth_type: %i[refresh_token access_token]
 
-    belongs_to :user, class_name: Spree::UserClassHandle.new
+    belongs_to :user, class_name: ::Spree::UserClassHandle.new
 
     scope :non_expired, -> {
       where(

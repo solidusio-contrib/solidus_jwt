@@ -25,7 +25,7 @@ module SolidusJwt
       current_time = Time.current.to_i
 
       # @see https://github.com/jwt/ruby-jwt#support-for-reserved-claim-names
-      jwt_payload[:exp] ||= current_time + expires_in if expires_in.present?
+      jwt_payload[:exp] ||= current_time + expires_in.to_i if expires_in.present?
       jwt_payload[:iat] ||= current_time
       jwt_payload[:iss] ||= 'solidus'
 

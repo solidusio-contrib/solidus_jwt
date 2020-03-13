@@ -1,6 +1,6 @@
 module SolidusJwt
   MAJOR = 1
-  MINOR = 0
+  MINOR = 1
   PATCH = 0
   PRERELEASE = nil
 

@@ -8,6 +8,10 @@ module SolidusJwt
           end
         end
 
+        ##
+        # Overrides Solidus
+        # @see https://github.com/solidusio/solidus/blob/master/api/app/controllers/spree/api/base_controller.rb
+        #
         def load_user
           return super unless json_web_token.present?
       

@@ -37,10 +37,19 @@ module SolidusJwt
       non_expired.where(active: true).find_by(token: token).present?
     end
 
+    ##
+    # Whether the token should be honored.
+    # @return [Boolean] Will be true if the token is active and not expired.
+    #   Otherwise false.
     def honor?
       active? && !expired?
     end
 
+    ##
+    # Whether the token is expired
+    # @return [Boolean] If the token is older than the configured refresh
+    #   expiration amount then will be true. Otherwise false.
+    #
     def expired?
       created_at < SolidusJwt::Config.refresh_expiration.seconds.ago
     end

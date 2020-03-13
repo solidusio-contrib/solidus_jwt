@@ -8,7 +8,7 @@ module SolidusJwt
     #   payload = {
     #     sub: 1,
     #     iat: DateTime.current.to_i,
-    #     exp: 1.hour.from_now.to_i    
+    #     exp: 1.hour.from_now.to_i
     #   }
     #
     #   SolidusJwt.encode payload: payload
@@ -30,7 +30,7 @@ module SolidusJwt
       jwt_payload[:iss] ||= 'solidus'
 
       JWT.encode(jwt_payload, SolidusJwt::Config.jwt_secret,
-                 SolidusJwt::Config.jwt_algorithm)
+        SolidusJwt::Config.jwt_algorithm)
     end
   end
 end

@@ -6,14 +6,14 @@ module SolidusJwt
     #
     # @example decode a token.
     #   SolidusJwt.decode('abc.123.efg')
-    #   #=> [{"sub"=>"1234567890", "name"=>"John Doe", "iat"=>1516239022}, {"alg"=>"HS256", "typ"=>"JWT"}] 
+    #   #=> [{"sub"=>"1234567890", "name"=>"John Doe", "iat"=>1516239022}, {"alg"=>"HS256", "typ"=>"JWT"}]
     #
     # @param token [String] The token to decode
     # @return [Array<Hash>]
     #
     def decode(token)
       JWT.decode(token, SolidusJwt::Config.jwt_secret, true,
-                 algorithm: SolidusJwt::Config.jwt_algorithm)
+        algorithm: SolidusJwt::Config.jwt_algorithm)
     end
   end
 end

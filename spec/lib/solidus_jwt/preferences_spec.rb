@@ -14,7 +14,7 @@ RSpec.describe SolidusJwt::Preferences do
   describe '#allow_spree_api_key' do
     subject { instance.allow_spree_api_key }
 
-    it { is_expected.to eql true }
+    it { is_expected.to be true }
   end
 
   describe '#jwt_algorithm' do
@@ -26,7 +26,7 @@ RSpec.describe SolidusJwt::Preferences do
   describe '#jwt_expiration' do
     subject { instance.jwt_expiration }
 
-    it { is_expected.to eql 3600 }
+    it { is_expected.to be 3600 }
   end
 
   describe '#jwt_options' do

@@ -3,7 +3,7 @@ require 'spree/core'
 module SolidusJwt
   class Engine < Rails::Engine
     include SolidusSupport::EngineExtensions::Decorators
-    
+
     isolate_namespace ::Spree
 
     engine_name 'solidus_jwt'

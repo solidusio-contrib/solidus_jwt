@@ -1,9 +1,11 @@
 module SolidusJwt
   class Token < BaseRecord
     attr_readonly :token
-    enum auth_type: %i[refresh_token access_token]
+    enum auth_type: { refresh_token: 0, access_token: 1 }
 
+    # rubocop:disable Rails/ReflectionClassName
     belongs_to :user, class_name: ::Spree::UserClassHandle.new
+    # rubocop:enable Rails/ReflectionClassName
 
     scope :non_expired, -> {
       where(
@@ -12,7 +14,7 @@ module SolidusJwt
       )
     }
 
-    enum auth_type: %i[refresh access]
+    enum auth_type: { refresh: 0, access: 1 }
 
     validates :token, presence: true
 
@@ -24,9 +26,11 @@ module SolidusJwt
     # Set all  non expired refresh tokens to inactive
     #
     def self.invalidate(user)
+      # rubocop:disable Rails/SkipsModelValidations
       non_expired.
         where(user_id: user.to_param).
         update_all(active: false)
+      # rubocop:enable Rails/SkipsModelValidations
     end
 
     ##

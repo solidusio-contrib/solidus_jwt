@@ -12,9 +12,9 @@ module Spree
         when Spree::User
           render json: token_response_json(result)
         when Hash
-          render status: 401, json: { error: I18n.t(result[:message], scope: 'devise.failure') }
+          render status: :unauthorized, json: { error: I18n.t(result[:message], scope: 'devise.failure') }
         else
-          render status: 401, json: { error: I18n.t(:invalid_credentials, scope: 'solidus_jwt') }
+          render status: :unauthorized, json: { error: I18n.t(:invalid_credentials, scope: 'solidus_jwt') }
         end
       end
 

@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
   s.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-
   s.add_dependency 'jwt'
   s.add_dependency 'solidus_auth_devise'
   s.add_dependency 'solidus_core', ['>= 2.0.0', '< 3']

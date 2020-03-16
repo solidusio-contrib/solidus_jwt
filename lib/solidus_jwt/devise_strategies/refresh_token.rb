@@ -6,7 +6,9 @@ module SolidusJwt
 
         block = proc do
           # If we honor then mark the refresh token as stale for one time use
+          # rubocop:disable Rails/SkipsModelValidations
           resource.honor? && resource.update_columns(active: false)
+          # rubocop:enable Rails/SkipsModelValidations
         end
 
         if resource.user.valid_for_authentication?(&block)

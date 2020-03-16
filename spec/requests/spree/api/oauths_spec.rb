@@ -7,7 +7,7 @@ RSpec.describe 'Token Retrieval', type: :request do
   describe '/api/token' do
     context 'when username and password are provided' do
       context 'when success' do
-        before(:each) do
+        before do
           post '/oauth/token', params: { username: user.email, password: 'password', grant_type: 'password' }
         end
 
@@ -24,23 +24,25 @@ RSpec.describe 'Token Retrieval', type: :request do
       end
 
       context 'when warden failure' do
-        subject do
+        def send_request
           post '/oauth/token', params: { username: user.email, password: 'password', grant_type: 'password' }
         end
 
-        before do
-          expect_any_instance_of(Spree::Api::OauthsController).to receive(:try_authenticate_user) do
-            throw(:warden, { scope: :spree_user, message: :locked })
-          end
-        end
-
         it 'responds with status 401' do
-          subject
+          expect_any_instance_of(Spree::Api::OauthsController).to receive(:try_authenticate_user) do # rubocop:disable RSpec/AnyInstance
+            throw(:warden, scope: :spree_user, message: :locked)
+          end
+
+          send_request
           expect(response).to have_http_status(:unauthorized)
         end
 
         it 'responds with translated Devise error message' do
-          subject
+          expect_any_instance_of(Spree::Api::OauthsController).to receive(:try_authenticate_user) do # rubocop:disable RSpec/AnyInstance
+            throw(:warden, scope: :spree_user, message: :locked)
+          end
+
+          send_request
           json = JSON.parse(response.body)
 
           expect(json).to have_key('error')
@@ -49,17 +51,18 @@ RSpec.describe 'Token Retrieval', type: :request do
       end
 
       context 'when invalid password' do
-        subject do
+        def send_request
           post '/oauth/token', params: { username: user.email, password: 'invalid', grant_type: 'password' }
         end
 
         it 'responds with status 401' do
-          subject
+          send_request
           expect(response).to have_http_status(:unauthorized)
         end
 
         it 'responds with invalid username or password' do
-          subject
+          send_request
+
           json = JSON.parse(response.body)
 
           expect(json).to have_key('error')
@@ -68,13 +71,12 @@ RSpec.describe 'Token Retrieval', type: :request do
 
         context 'with error message translation' do
           before do
-            expect(I18n).to receive(:t).with(:invalid_credentials, scope: 'solidus_jwt') do
-              'Wrong token!'
-            end
+            allow(I18n).to receive(:t).with(:invalid_credentials, scope: 'solidus_jwt').and_return('Wrong token!')
           end
 
           it 'responds with translated error message' do
-            subject
+            send_request
+
             json = JSON.parse(response.body)
 
             expect(json).to have_key('error')
@@ -88,7 +90,7 @@ RSpec.describe 'Token Retrieval', type: :request do
       let(:refresh_token) { user.auth_tokens.create! }
 
       context 'when success' do
-        before(:each) do
+        before do
           post '/oauth/token', params: { refresh_token: refresh_token.token, grant_type: 'refresh_token' }
         end
 
@@ -105,7 +107,7 @@ RSpec.describe 'Token Retrieval', type: :request do
       end
 
       context 'when failure' do
-        before(:each) do
+        before do
           post '/oauth/token', params: { refresh_token: 'invalid', grant_type: 'refresh_token' }
         end
 

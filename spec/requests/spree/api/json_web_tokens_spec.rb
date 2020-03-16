@@ -11,7 +11,7 @@ RSpec.describe 'SolidusJwt Authentication', type: :request do
 
   it 'fails if user visits api without authenticating' do
     get spree.api_user_path(user.id)
-    expect(response.status).to eql(401)
+    expect(response.status).to be(401)
   end
 
   context 'when jwt fails to decode' do
@@ -20,7 +20,7 @@ RSpec.describe 'SolidusJwt Authentication', type: :request do
     it 'renders invalid_api_key' do
       get spree.api_user_path(user.id), params: params
 
-      expect(response.status).to eql(401)
+      expect(response.status).to be(401)
       expect(response.body).to include('Invalid API key')
     end
   end
@@ -31,7 +31,7 @@ RSpec.describe 'SolidusJwt Authentication', type: :request do
 
       it 'passes authentication' do
         get spree.api_user_path(user.id), params: params
-        expect(response.status).to eql(200)
+        expect(response.status).to be(200)
       end
     end
 
@@ -40,7 +40,7 @@ RSpec.describe 'SolidusJwt Authentication', type: :request do
 
       it 'passes authentication' do
         get spree.api_user_path(user.id), params: params
-        expect(response.status).to eql(200)
+        expect(response.status).to be(200)
       end
     end
   end
@@ -59,7 +59,7 @@ RSpec.describe 'SolidusJwt Authentication', type: :request do
 
       it 'fails authentication' do
         get spree.api_user_path(user.id), params: params
-        expect(response.status).to eql(401)
+        expect(response.status).to be(401)
       end
     end
 
@@ -68,7 +68,7 @@ RSpec.describe 'SolidusJwt Authentication', type: :request do
 
       it 'passes authentication' do
         get spree.api_user_path(user.id), params: params
-        expect(response.status).to eql(200)
+        expect(response.status).to be(200)
       end
     end
   end

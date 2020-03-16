@@ -1,5 +1,4 @@
-$:.push File.expand_path('lib', __dir__)
-require 'solidus_jwt/version'
+require_relative 'lib/solidus_jwt/version'
 
 Gem::Specification.new do |s|
   s.name        = 'solidus_jwt'
@@ -10,29 +9,28 @@ Gem::Specification.new do |s|
 
   s.author    = 'Taylor Scott'
   s.email     = 't.skukx@gmail.com'
-  s.homepage  = 'https://github.com/skukx'
+  s.homepage  = 'https://github.com/skukx/solidus_jwt'
 
-  s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
-  s.test_files = Dir['test/**/*']
+  s.metadata['homepage_uri'] = s.homepage
+  s.metadata['source_code_uri'] = s.homepage
+
+  s.required_ruby_version = Gem::Requirement.new('~> 2.4')
+
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  files = Dir.chdir(__dir__) { `git ls-files -z`.split("\x0") }
+
+  s.files = files.grep_v(%r{^(test|spec|features)/})
+  s.test_files = files.grep(%r{^(test|spec|features)/})
+  s.bindir = "exe"
+  s.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
+  s.require_paths = ["lib"]
 
   s.add_dependency 'jwt'
   s.add_dependency 'solidus_auth_devise'
-  s.add_dependency 'solidus_api', ['>= 1.0', '< 3']
-  s.add_dependency 'solidus_core', ['>= 1.0', '< 3']
-  s.add_dependency 'solidus_support', '>= 0.1.3'
+  s.add_dependency 'solidus_core', ['>= 2.0.0', '< 3']
+  s.add_dependency 'solidus_support', '~> 0.4.0'
 
   s.add_development_dependency 'byebug'
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'factory_bot'
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'gem-release'
-  s.add_development_dependency 'poltergeist'
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'rubocop-rspec'
-  s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'selenium-webdriver'
-  s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'solidus_dev_support'
 end

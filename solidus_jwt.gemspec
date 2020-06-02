@@ -2,7 +2,7 @@ require_relative 'lib/solidus_jwt/version'
 
 Gem::Specification.new do |s|
   s.name        = 'solidus_jwt'
-  s.version     = SolidusJwt.version
+  s.version     = SolidusJwt::VERSION
   s.summary     = 'Add Json Web Tokens to Solidus API'
   s.description = 'Add Json Web Tokens to Solidus API'
   s.license     = 'BSD-3-Clause'

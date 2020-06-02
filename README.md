@@ -111,6 +111,19 @@ You can now use the `access_token` to authentication with the
 [Solidus API](https://github.com/solidusio/solidus/tree/master/api) in place
 of the `spree_api_key`.
 
+#### Matching token to a user
+
+By default, the token matches a user using the `Spree::User.for_jwt` method. This methods
+Finds a user by id using the subject claim of the token. If you want to customize how the
+subject claim is interpreted you can override this method
+
+```ruby
+def self.for_jwt(sub)
+  # find_by(id: sub)
+  find_by(my_external_id: sub)
+end
+```
+
 ### Obtain a refresh token
 
 To refresh your access token, instead of re-authenticating you can send

@@ -2,7 +2,27 @@ module SolidusJwt
   module Spree
     module UserDecorator
       def self.prepended(base)
+        base.extend ClassMethods
         base.has_many :auth_tokens, class_name: 'SolidusJwt::Token'
+      end
+
+      module ClassMethods
+        ##
+        # Find user based on subject claim in
+        # our json web token
+        # @see https://tools.ietf.org/html/rfc7519#section-4.1.2
+        #
+        # @example get user token
+        #   payload = SolidusJwt.decode(token).first
+        #   user = Spree::User.for_jwt(payload['sub'])
+        #
+        # @param sub [string] The subject claim of jwt
+        # @return [Spree.user_class, NilClass] If a match is found, returns the user,
+        #   otherwise, returns nil
+        #
+        def for_jwt(sub)
+          find_by(id: sub)
+        end
       end
 
       ##

@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'jwt'
   s.add_dependency 'solidus_auth_devise'
   s.add_dependency 'solidus_core', ['>= 2.0.0', '< 3']
-  s.add_dependency 'solidus_support', '~> 0.4.0'
+  s.add_dependency 'solidus_support', '~> 0.5.0'
 
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'solidus_dev_support'

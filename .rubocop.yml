@@ -6,24 +6,7 @@ AllCops:
     - sandbox/**/*
     - spec/dummy/**/*
 
-Style/FrozenStringLiteralComment:
-  Enabled: false
-
-Naming/PredicateName:
-  Exclude:
-    - app/decorators/solidus_kits/spree/stock/availability_validator_decorator.rb
-
 Metrics/LineLength:
-  Enabled: false
-
-Rails/SkipsModelValidations:
-  Exclude:
-    - 'spec/**/*'
-
-RSpec/BeforeAfterAll:
-  Enabled: false
-
-RSpec/ContextWording:
   Enabled: false
 
 RSpec/MultipleExpectations:

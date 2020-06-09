@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/solidus_jwt/version'
 
 Gem::Specification.new do |s|

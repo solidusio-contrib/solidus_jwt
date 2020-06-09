@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_examples 'Decodeable Examples' do
   describe 'decode' do
     let(:token) do

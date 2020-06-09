@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusJwt
   base_class = defined?(::ApplicationRecord) ? ::ApplicationRecord : ActiveRecord::Base
 

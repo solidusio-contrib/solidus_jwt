@@ -53,7 +53,9 @@ gem 'solidus', github: 'solidusio/solidus', branch: '$BRANCH'
 gem 'solidus_auth_devise', '>= 2.1.0'
 gem 'rails-i18n'
 gem 'solidus_i18n'
+
 gem '$extension_name', path: '..'
+
 group :test, :development do
   platforms :mri do
     gem 'pry-byebug'
@@ -69,6 +71,7 @@ unbundled bundle exec rails generate spree:install \
   --auto-accept \
   --user_class=Spree::User \
   --enforce_available_locales=true \
+  --with-authentication=false \
   $@
 
 unbundled bundle exec rails generate solidus:auth:install

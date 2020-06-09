@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'spree/testing_support/factories/user_factory'
 
@@ -46,11 +48,11 @@ RSpec.describe 'SolidusJwt Authentication', type: :request do
   end
 
   context 'when spree api key is not allowed' do
-    before(:all) do
+    before do
       SolidusJwt::Config.allow_spree_api_key = false
     end
 
-    after(:all) do
+    after do
       SolidusJwt::Config.allow_spree_api_key = true
     end
 

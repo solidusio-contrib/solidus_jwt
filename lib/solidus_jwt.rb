@@ -13,6 +13,7 @@ require 'solidus_jwt/devise_strategies/refresh_token'
 
 require 'solidus_jwt/version'
 require 'solidus_jwt/config'
+require 'solidus_jwt/deprecator'
 require 'solidus_jwt/concerns/decodeable'
 require 'solidus_jwt/concerns/encodeable'
 require 'solidus_jwt/distributor/devise'
@@ -20,4 +21,6 @@ require 'solidus_jwt/distributor/devise'
 module SolidusJwt
   extend Decodeable
   extend Encodeable
+
+  extend Deprecator
 end

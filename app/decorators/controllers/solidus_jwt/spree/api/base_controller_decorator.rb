@@ -18,7 +18,7 @@ module SolidusJwt
           return super if json_web_token.blank?
 
           # rubocop:disable Naming/MemoizedInstanceVariableName
-          @current_api_user ||= ::Spree.user_class.for_jwt(json_web_token['sub'] || json_web_token['id'])
+          @current_api_user ||= ::Spree.user_class.for_jwt(json_web_token.with_indifferent_access)
           # rubocop:enable Naming/MemoizedInstanceVariableName
         end
 

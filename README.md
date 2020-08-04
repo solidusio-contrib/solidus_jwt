@@ -117,6 +117,15 @@ By default, the token matches a user using the `Spree::User.for_jwt` method. Thi
 Finds a user by id using the subject claim of the token. If you want to customize how the
 subject claim is interpreted you can override this method
 
+**solidus_jwt 1.3 and greater**
+```ruby
+def self.for_jwt(payload)
+  # find_by(id: payload[:sub])
+  find_by(my_external_id: payload[:sub])
+end
+```
+
+**less than solidus_jwt 1.3**
 ```ruby
 def self.for_jwt(sub)
   # find_by(id: sub)

@@ -22,7 +22,20 @@ module SolidusJwt
         # @return [Spree.user_class, NilClass] If a match is found, returns the user,
         #   otherwise, returns nil
         #
-        def for_jwt(sub)
+        def for_jwt(payload)
+          sub = if payload.is_a?(Hash)
+                  payload = payload.with_indifferent_access
+                  payload[:sub] || payload[:id]
+                else
+                  SolidusJwt.deprecator.deprecation_warning(
+                    "Calling for_jwt on #{self.name} with the sub (String) as an argument", 
+                    "Signature will change from #{self.name}#for_jwt('some-id') to #{self.name}#for_jwt({ 'sub' => 'some-id' })", 
+                    caller
+                  )
+
+                  payload
+                end
+
           find_by(id: sub)
         end
       end

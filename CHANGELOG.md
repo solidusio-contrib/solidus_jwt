@@ -1,8 +1,8 @@
 # Changelog
 
-## [v1.2.0](https://github.com/solidusio-contrib/solidus_jwt/tree/v1.2.0) (2023-01-09)
+## [v1.2.1](https://github.com/solidusio-contrib/solidus_jwt/tree/v1.2.1) (2023-01-09)
 
-[Full Changelog](https://github.com/solidusio-contrib/solidus_jwt/compare/v1.2.0...v1.2.0)
+[Full Changelog](https://github.com/solidusio-contrib/solidus_jwt/compare/v1.2.0...v1.2.1)
 
 **Merged pull requests:**
 

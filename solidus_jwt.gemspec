@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
 
   s.author    = 'Taylor Scott'
   s.email     = 't.skukx@gmail.com'
-  s.homepage  = 'https://github.com/skukx/solidus_jwt'
+  s.homepage  = 'https://github.com/solidusio-contrib/solidus_jwt'
 
   s.metadata['homepage_uri'] = s.homepage
   s.metadata['source_code_uri'] = s.homepage

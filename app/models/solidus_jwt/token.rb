@@ -20,6 +20,17 @@ module SolidusJwt
       end
     }
 
+    scope :honorable, -> {
+      if SolidusJwt::Config.refresh_expiration
+        where(
+          'solidus_jwt_tokens.created_at >= ?',
+          SolidusJwt::Config.refresh_expiration.seconds.ago
+        ).where(active: true)
+      else
+        where(active: true)
+      end
+    }
+
     enum auth_type: { refresh: 0, access: 1 }
 
     validates :token, presence: true

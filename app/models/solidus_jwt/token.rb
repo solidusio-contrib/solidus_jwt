@@ -10,10 +10,14 @@ module SolidusJwt
     # rubocop:enable Rails/ReflectionClassName
 
     scope :non_expired, -> {
-      where(
-        'solidus_jwt_tokens.created_at >= ?',
-        SolidusJwt::Config.refresh_expiration.seconds.ago
-      )
+      if SolidusJwt::Config.refresh_expiration
+        where(
+          'solidus_jwt_tokens.created_at >= ?',
+          SolidusJwt::Config.refresh_expiration.seconds.ago
+        )
+      else
+        all
+      end
     }
 
     enum auth_type: { refresh: 0, access: 1 }
@@ -57,7 +61,11 @@ module SolidusJwt
     #   expiration amount then will be true. Otherwise false.
     #
     def expired?
-      created_at < SolidusJwt::Config.refresh_expiration.seconds.ago
+      if SolidusJwt::Config.refresh_expiration
+        created_at < SolidusJwt::Config.refresh_expiration.seconds.ago
+      else
+        false
+      end
     end
   end
 end

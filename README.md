@@ -1,7 +1,6 @@
 SolidusJwt
 ==========
 
-[![CircleCI](https://circleci.com/gh/skukx/solidus_jwt.svg?style=svg)](https://circleci.com/gh/skukx/solidus_jwt)
 [![Gem Version](https://badge.fury.io/rb/solidus_jwt.svg)](https://badge.fury.io/rb/solidus_jwt)
 
 This gem gives [Solidus](https://github.com/solidusio/solidus) stores the ability to authenticate API requests with
@@ -58,7 +57,7 @@ Defaults to `3600` (1 hour). The amount of time in seconds that the token should
 Defaults to `{ only: %i[email first_name id last_name] }`. These options are passed into `Spree::User#as_json` when serializing the token's payload.  Keep in mind that the more information included, the larger the token will be. It may be in your best interest to keep it short and simple.
 
 #### `refresh_expiration`:
-Defaults to `2592000` (30 days). The amount of time in seconds that the token should last for.
+Defaults to `2592000` (30 days). The amount of time in seconds that the token should last for. Optionally, this may be set to nil so that refresh tokens never expire
 
 Usage
 -------------

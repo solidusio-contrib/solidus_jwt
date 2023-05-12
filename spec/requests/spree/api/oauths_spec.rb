@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'spree/testing_support/factories/user_factory'
 
 RSpec.describe 'Token Retrieval', type: :request do
   let(:user) { FactoryBot.create(:user, password: 'password') }

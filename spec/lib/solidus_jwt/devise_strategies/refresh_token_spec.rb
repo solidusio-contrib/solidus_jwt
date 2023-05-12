@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'spree/testing_support/factories/user_factory'
 
 RSpec.describe SolidusJwt::DeviseStrategies::RefreshToken do
   let(:request) { instance_double('ActionController::Request') }

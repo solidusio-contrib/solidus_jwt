@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'spree/testing_support/factories/user_factory'
 
 RSpec.describe 'Token Retrieval', type: :request do
   let(:user) { FactoryBot.create(:user, password: 'password') }
 
   describe '/api/token' do
     context 'when username and password are provided' do
-      context 'when success' do
+      context 'when success' do # rubocop:disable RSpec/NestedGroups
         before do
           post '/oauth/token', params: { username: user.email, password: 'password', grant_type: 'password' }
         end
@@ -20,39 +19,45 @@ RSpec.describe 'Token Retrieval', type: :request do
         it 'responds with access_token and refresh_token' do
           json = JSON.parse(response.body)
 
-          expect(json).to have_key('access_token')
-          expect(json).to have_key('refresh_token')
+          aggregate_failures do
+            expect(json).to have_key('access_token')
+            expect(json).to have_key('refresh_token')
+          end
         end
       end
 
-      context 'when warden failure' do
+      context 'when warden failure' do # rubocop:disable RSpec/NestedGroups
         def send_request
           post '/oauth/token', params: { username: user.email, password: 'password', grant_type: 'password' }
         end
 
         it 'responds with status 401' do
-          expect_any_instance_of(Spree::Api::OauthsController).to receive(:try_authenticate_user) do # rubocop:disable RSpec/AnyInstance
-            throw(:warden, scope: :spree_user, message: :locked)
-          end
+          aggregate_failures do
+            expect_any_instance_of(Spree::Api::OauthsController).to receive(:try_authenticate_user) do # rubocop:disable RSpec/AnyInstance
+              throw(:warden, scope: :spree_user, message: :locked)
+            end
 
-          send_request
-          expect(response).to have_http_status(:unauthorized)
+            send_request
+            expect(response).to have_http_status(:unauthorized)
+          end
         end
 
         it 'responds with translated Devise error message' do
-          expect_any_instance_of(Spree::Api::OauthsController).to receive(:try_authenticate_user) do # rubocop:disable RSpec/AnyInstance
-            throw(:warden, scope: :spree_user, message: :locked)
+          aggregate_failures do
+            expect_any_instance_of(Spree::Api::OauthsController).to receive(:try_authenticate_user) do # rubocop:disable RSpec/AnyInstance
+              throw(:warden, scope: :spree_user, message: :locked)
+            end
+
+            send_request
+            json = JSON.parse(response.body)
+
+            expect(json).to have_key('error')
+            expect(json['error']).to eq('Your account is locked.')
           end
-
-          send_request
-          json = JSON.parse(response.body)
-
-          expect(json).to have_key('error')
-          expect(json['error']).to eq('Your account is locked.')
         end
       end
 
-      context 'when invalid password' do
+      context 'when invalid password' do # rubocop:disable RSpec/NestedGroups
         def send_request
           post '/oauth/token', params: { username: user.email, password: 'invalid', grant_type: 'password' }
         end
@@ -67,11 +72,13 @@ RSpec.describe 'Token Retrieval', type: :request do
 
           json = JSON.parse(response.body)
 
-          expect(json).to have_key('error')
-          expect(json['error']).to eq('invalid username or password')
+          aggregate_failures do
+            expect(json).to have_key('error')
+            expect(json['error']).to eq('invalid username or password')
+          end
         end
 
-        context 'with error message translation' do
+        context 'with error message translation' do # rubocop:disable RSpec/NestedGroups
           before do
             allow(I18n).to receive(:t).with(:invalid_credentials, scope: 'solidus_jwt').and_return('Wrong token!')
           end
@@ -81,8 +88,10 @@ RSpec.describe 'Token Retrieval', type: :request do
 
             json = JSON.parse(response.body)
 
-            expect(json).to have_key('error')
-            expect(json['error']).to eq('Wrong token!')
+            aggregate_failures do
+              expect(json).to have_key('error')
+              expect(json['error']).to eq('Wrong token!')
+            end
           end
         end
       end
@@ -91,7 +100,7 @@ RSpec.describe 'Token Retrieval', type: :request do
     context 'when refresh token provided' do
       let(:refresh_token) { user.auth_tokens.create! }
 
-      context 'when success' do
+      context 'when success' do # rubocop:disable RSpec/NestedGroups
         before do
           post '/oauth/token', params: { refresh_token: refresh_token.token, grant_type: 'refresh_token' }
         end
@@ -103,12 +112,14 @@ RSpec.describe 'Token Retrieval', type: :request do
         it 'responds with access_token and refresh_token' do
           json = JSON.parse(response.body)
 
-          expect(json).to have_key('access_token')
-          expect(json).to have_key('refresh_token')
+          aggregate_failures do
+            expect(json).to have_key('access_token')
+            expect(json).to have_key('refresh_token')
+          end
         end
       end
 
-      context 'when failure' do
+      context 'when failure' do # rubocop:disable RSpec/NestedGroups
         before do
           post '/oauth/token', params: { refresh_token: 'invalid', grant_type: 'refresh_token' }
         end

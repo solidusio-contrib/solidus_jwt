@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'spree/testing_support/factories/user_factory'
 
 RSpec.describe 'SolidusJwt Authentication', type: :request do
   let(:params) do
@@ -22,8 +21,10 @@ RSpec.describe 'SolidusJwt Authentication', type: :request do
     it 'renders invalid_api_key' do
       get spree.api_user_path(user.id), params: params
 
-      expect(response.status).to be(401)
-      expect(response.body).to include('Invalid API key')
+      aggregate_failures do
+        expect(response.status).to be(401)
+        expect(response.body).to include('Invalid API key')
+      end
     end
   end
 

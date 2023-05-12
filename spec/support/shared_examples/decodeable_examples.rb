@@ -14,10 +14,12 @@ RSpec.shared_examples 'Decodeable Examples' do
 
       decoded_token = subject.decode(token)
 
-      expect(JWT).to have_received(:decode).with(token, SolidusJwt::Config.jwt_secret,
-        true, hash_including(algorithm: SolidusJwt::Config.jwt_algorithm))
-      expect(decoded_token).to be_kind_of(Array)
-      expect(decoded_token.first).to include(payload.as_json)
+      aggregate_failures do
+        expect(JWT).to have_received(:decode).with(token, SolidusJwt::Config.jwt_secret,
+          true, hash_including(algorithm: SolidusJwt::Config.jwt_algorithm))
+        expect(decoded_token).to be_kind_of(Array)
+        expect(decoded_token.first).to include(payload.as_json)
+      end
     end
   end
 end

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'spree/testing_support/factories/user_factory'
 
 RSpec.describe SolidusJwt::DeviseStrategies::RefreshToken do
   let(:request) { instance_double('ActionController::Request') }
@@ -14,13 +13,11 @@ RSpec.describe SolidusJwt::DeviseStrategies::RefreshToken do
     }
   end
 
-  let(:headers) { {} }
-  let(:user) { FactoryBot.create(:user, password: password) }
-  let(:password) { 'secret' }
+  let(:user) { FactoryBot.create(:user, password: 'secret') }
   let(:token) { user.auth_tokens.create! }
 
   before do
-    allow(request).to receive(:headers).and_return(:headers)
+    allow(request).to receive(:headers).and_return({})
 
     allow(strategy).to receive(:request).and_return(request)
     allow(strategy).to receive(:params).and_return(params)

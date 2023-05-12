@@ -14,7 +14,8 @@ module SolidusJwt
     #   }
     #
     #   SolidusJwt.encode payload: payload
-    #   #=> 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTU4NDEzMjExOCwiZXhwIjoxNTg0MTM1NzE4LCJpc3MiOiJzb2xpZHVzIn0.OKZOGlawx435GdgKp2AGD8SKxW7sqn0h-Ef2qdVSxqQ'
+    #   #=> 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlhdCI6MTU4NDEzMjExOCwiZXhwIj
+    #    oxNTg0MTM1NzE4LCJpc3MiOiJzb2xpZHVzIn0.OKZOGlawx435GdgKp2AGD8SKxW7sqn0h-Ef2qdVSxqQ'
     #
     # @param payload [Hash] Attributes to place within the jwt
     # @param expires_in [Integer] How long until token expires in Seconds (*Optional*).

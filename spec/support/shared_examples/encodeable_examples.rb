@@ -9,9 +9,11 @@ RSpec.shared_examples 'Encodeable Examples' do
 
       token = subject.encode(payload: payload)
 
-      expect(JWT).to have_received(:encode).with(hash_including('iat', 'user_id' => 1),
-        SolidusJwt::Config.jwt_secret, SolidusJwt::Config.jwt_algorithm)
-      expect(token).to be_kind_of String
+      aggregate_failures do
+        expect(JWT).to have_received(:encode).with(hash_including('iat', 'user_id' => 1),
+          SolidusJwt::Config.jwt_secret, SolidusJwt::Config.jwt_algorithm)
+        expect(token).to be_kind_of String
+      end
     end
 
     context 'when expiration is passed in' do
@@ -20,9 +22,11 @@ RSpec.shared_examples 'Encodeable Examples' do
 
         token = subject.encode(payload: payload, expires_in: 60)
 
-        expect(JWT).to have_received(:encode).with(hash_including('iat', 'exp', 'user_id' => 1),
-          SolidusJwt::Config.jwt_secret, SolidusJwt::Config.jwt_algorithm)
-        expect(token).to be_kind_of String
+        aggregate_failures do
+          expect(JWT).to have_received(:encode).with(hash_including('iat', 'exp', 'user_id' => 1),
+            SolidusJwt::Config.jwt_secret, SolidusJwt::Config.jwt_algorithm)
+          expect(token).to be_kind_of String
+        end
       end
     end
   end

@@ -15,9 +15,11 @@ RSpec.describe SolidusJwt::Token, type: :model do
     let(:instance) { FactoryBot.build(:token, token: nil) }
 
     it 'generates one automatically' do
-      expect(instance.token).to be_nil
-      instance.save
-      expect(instance.token).to be_present
+      aggregate_failures do
+        expect(instance.token).to be_nil
+        instance.save
+        expect(instance.token).to be_present
+      end
     end
   end
 

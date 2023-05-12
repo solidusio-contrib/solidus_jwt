@@ -9,14 +9,13 @@ RSpec.describe SolidusJwt::DeviseStrategies::Password do
   let(:params) do
     {
       username: user.email,
-      password: password,
+      password: 'secret',
       grant_type: 'password'
     }
   end
 
   let(:headers) { {} }
-  let(:user) { FactoryBot.create(:user, password: password) }
-  let(:password) { 'secret' }
+  let(:user) { FactoryBot.create(:user, password: 'secret') }
 
   before do
     allow(request).to receive(:headers).and_return(:headers)
@@ -59,7 +58,7 @@ RSpec.describe SolidusJwt::DeviseStrategies::Password do
         {
           username: user.email,
           password: 'invalid',
-          grant_type: password
+          grant_type: 'secret'
         }
       end
 

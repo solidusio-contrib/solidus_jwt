@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.metadata['homepage_uri'] = s.homepage
   s.metadata['source_code_uri'] = s.homepage
 
-  s.required_ruby_version = Gem::Requirement.new('>= 3.0.0')
+  s.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.

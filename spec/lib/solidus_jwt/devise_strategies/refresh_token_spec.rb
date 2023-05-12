@@ -13,13 +13,11 @@ RSpec.describe SolidusJwt::DeviseStrategies::RefreshToken do
     }
   end
 
-  let(:headers) { {} }
-  let(:user) { FactoryBot.create(:user, password: password) }
-  let(:password) { 'secret' }
+  let(:user) { FactoryBot.create(:user, password: 'secret') }
   let(:token) { user.auth_tokens.create! }
 
   before do
-    allow(request).to receive(:headers).and_return(:headers)
+    allow(request).to receive(:headers).and_return({})
 
     allow(strategy).to receive(:request).and_return(request)
     allow(strategy).to receive(:params).and_return(params)

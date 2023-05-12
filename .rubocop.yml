@@ -2,15 +2,4 @@ require:
   - solidus_dev_support/rubocop
 
 AllCops:
-  Exclude:
-    - sandbox/**/*
-    - spec/dummy/**/*
-
-Metrics/LineLength:
-  Enabled: false
-
-RSpec/MultipleExpectations:
-  Enabled: false
-
-RSpec/NestedGroups:
-  Enabled: false
+  NewCops: disable

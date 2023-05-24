@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
 
   s.metadata['homepage_uri'] = s.homepage
   s.metadata['source_code_uri'] = s.homepage
+  s.metadata['changelog_uri'] = 'https://github.com/solidusio/solidus_jwt/releases'
 
   s.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
 
